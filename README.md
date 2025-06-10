@@ -30,6 +30,7 @@ This presents a comparison of star-discrepancy values for point sets in 2 dimens
 *   **Optimal:** Known optimal star-discrepancy values (https://arxiv.org/abs/2311.17463) from Clement et al.
 
 The values are for 2D point sets for N points, where N ranges from 1 to 20. Openevolve matches the optimal star discrepancy for N < 11.
+The best results are bolded.
 
 | N  | Fibonacci | MPMC   | OpenEvolve | Optimal          |
 |----|-----------|--------|------------|------------------|
@@ -57,7 +58,7 @@ The values are for 2D point sets for N points, where N ranges from 1 to 20. Open
 
 ## Discovery of Better Point Sets
 We find point sets with lower star discrepancy than the current known best in 2D for N > 30.
-See the [results](results/) folder for the point sets we obtain using openevolve.
+See the [results](results/) folder for the point sets we obtain using openevolve. The best results are bolded.
 
 | N   | Fibonacci | Clément et al. | MPMC    | Openevolve       |
 |-----|-----------|----------------|---------|------------------|
