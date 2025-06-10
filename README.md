@@ -18,7 +18,8 @@ Star discrepancy is a fundamental concept in quasi-Monte Carlo (QMC) methods. QM
 *   Faster convergence rates compared to standard Monte Carlo methods that use random points.
 *   Improved efficiency in various fields like financial modeling, computer graphics, and scientific simulation where uniform sampling is crucial.
 
-Finding point sets with the smallest possible star discrepancy for a given N and d is a challenging but important problem.
+Finding point sets with the smallest possible star discrepancy for a given N and d is a challenging but important problem. 
+Check out the [example](examples/star_discrepancy_2D/) given for a 2D point set with 16 points.
 
 ## Comparison to Known Optimal Point Sets
 
@@ -56,9 +57,9 @@ The values are for 2D point sets for N points, where N ranges from 1 to 20. Open
 
 ## Discovery of Better Point Sets
 We find point sets with lower star discrepancy than the current known best in 2D for N > 30.
-See the results folder for the point sets we obtain using openevolve.
+See the [results](results) folder for the point sets we obtain using openevolve.
 
-| N   | Fibonacci | Clément et al. | MPMC    | Openevolve |
+| N   | Fibonacci | Clément et al. | MPMC    | OpenEvolve |
 |-----|-----------|----------------|---------|------------|
 | 30  | 0.07923   | 0.04240        | N/A     | 0.04380    |
 | 40  | 0.06384   | 0.03320        | N/A     | 0.03313    |
@@ -70,7 +71,7 @@ See the results folder for the point sets we obtain using openevolve.
 ![Example of Construction](best_points_visualization.png)
 
 
-| N    | Sobol   | Fibonacci | MPMC    | Openevolve |
+| N    | Sobol   | Fibonacci | MPMC    | OpenEvolve |
 |------|---------|-----------|---------|------------|
 | 140  | 0.03306 | 0.02128   | 0.01373 | 0.01151    |
 | 180  | 0.02466 | 0.01655   | 0.01147 | 0.01058    |
