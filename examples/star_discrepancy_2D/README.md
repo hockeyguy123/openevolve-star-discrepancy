@@ -94,10 +94,9 @@ for _ in range(25):  # Multiple restarts
 optimized_points = best_result.x.reshape(N, 2)
 
 return optimized_points
-
+```
 ![Iterative Optimization](openevolve_2D_16_optimal.png)
 
-```
 We apply this technique to construct 2D and 3D point sets for various N.
 To the best of our knowledge, we find 2D point sets for N > 20 with lower star discrepancy than current best point sets and extend 3D point construction to N=16.
 See these in the results folder.
