@@ -57,7 +57,7 @@ The values are for 2D point sets for N points, where N ranges from 1 to 20. Open
 
 ## Discovery of Better Point Sets
 We find point sets with lower star discrepancy than the current known best in 2D for N > 30.
-See the [results](results) folder for the point sets we obtain using openevolve.
+See the [results](results/) folder for the point sets we obtain using openevolve.
 
 | N   | Fibonacci | Clément et al. | MPMC    | OpenEvolve |
 |-----|-----------|----------------|---------|------------|
