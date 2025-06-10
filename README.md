@@ -66,7 +66,7 @@ See the results folder for the point sets we obtain using openevolve.
 | 60  | 0.04422   | 0.02435        | 0.02729 | 0.02336    |
 | 100 | 0.02749   | 0.01933        | 0.01879 | 0.01504    |
 
-# Example 2D Point Set Construction for 100 points using Openevolve
+### Example 2D Point Set Construction for 100 points using Openevolve
 ![Example of Construction](best_points_visualization.png)
 
 
