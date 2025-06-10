@@ -1,22 +1,3 @@
-# OpenEvolve
-
-An open-source implementation of the AlphaEvolve system described in the Google DeepMind paper "AlphaEvolve: A coding agent for scientific and algorithmic discovery" (2025).
-
-![OpenEvolve Logo](openevolve-logo.png)
-
-## Overview
-
-OpenEvolve is an evolutionary coding agent that uses Large Language Models to optimize code through an iterative process. It orchestrates a pipeline of LLM-based code generation, evaluation, and selection to continuously improve programs for a variety of tasks.
-
-Key features:
-- Evolution of entire code files, not just single functions
-- Support for multiple programming languages
-- Supports OpenAI-compatible APIs for any LLM
-- Multi-objective optimization
-- Flexible prompt engineering
-- Distributed evaluation
-
-
 ## Star Discrepancy
 Star discrepancy (often denoted D* or D*_N) is a quantitative measure of the uniformity of a set of N points within the d-dimensional unit hypercube [0,1]^d. It essentially gauges how evenly the points are spread out. A lower star discrepancy value indicates a more uniform distribution of points.
 
@@ -116,6 +97,24 @@ This work is limited by:
 1. The need to optimize point sets for each N and D
 2. The need for repeated sampling to generate low discrepancy sequences 
 2. Difficulty scaling to higher N and D
+
+# OpenEvolve
+
+An open-source implementation of the AlphaEvolve system described in the Google DeepMind paper "AlphaEvolve: A coding agent for scientific and algorithmic discovery" (2025).
+
+![OpenEvolve Logo](openevolve-logo.png)
+
+## Overview
+
+OpenEvolve is an evolutionary coding agent that uses Large Language Models to optimize code through an iterative process. It orchestrates a pipeline of LLM-based code generation, evaluation, and selection to continuously improve programs for a variety of tasks.
+
+Key features:
+- Evolution of entire code files, not just single functions
+- Support for multiple programming languages
+- Supports OpenAI-compatible APIs for any LLM
+- Multi-objective optimization
+- Flexible prompt engineering
+- Distributed evaluation
 
 
 ## How It Works
