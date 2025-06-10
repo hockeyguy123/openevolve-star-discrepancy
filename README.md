@@ -67,7 +67,7 @@ See the results folder for the point sets we obtain using openevolve.
 | 100 | 0.02749   | 0.01933        | 0.01879 | 0.01504    |
 
 # Example 2D Point Set Construction for 100 points using Openevolve
-![Example of Construction](results/star_discrepancy_Linf_2D_0100/best_points_visualization.png)
+![Example of Construction](best_points_visualization.png)
 
 
 | N    | Sobol   | Fibonacci | MPMC    | Openevolve |
