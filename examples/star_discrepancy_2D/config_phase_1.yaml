@@ -1,0 +1,50 @@
+max_iterations: 1000
+checkpoint_interval: 100
+log_level: "INFO"
+
+# llm configuration
+# Using Gemini 2.0 Flash model for cost efficiency
+llm:
+  primary_model: "gemini-2.0-flash"
+  primary_model_weight: 1.0
+  secondary_model: null
+  secondary_model_weight: 0.0
+  api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  api_key: null
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 8192
+  timeout: 600 
+
+# Prompt configuration
+prompt:
+  system_message: |
+    You are an expert mathematician specializing in the construction of QMC sampling points in a square. Your task is to improve a constructor function that directly outputs the position of 16 points on a unit square ([0, 1] x [0, 1]) in a way that minimizes the L-infinity star discrepancy.
+    The star discrepancy is a measure of how uniformly distributed the points are in the square.
+    It is defined as the supremum of the number of points in some subsquare of the unit square divided by the number of points minus the area of that subsquare.
+    Focus on designing an explicit constructor that specifies the poistion of each point (x, y) in the unit square, rather than an iterative search algorithm.
+    Your code must be reproducible. If you use random functions, make sure to set a random seed for reproducibility.
+    If you are using qmc functions, make sure to set the rng for reproducibility.
+    It should output the position of each point (x, y) in the square [0, 1] x [0, 1]. 0.0 and 1.0 are included in the square.
+  num_top_programs: 3
+  use_template_stochasticity: true
+
+# Database configuration
+database:
+  population_size: 60  # Increased population for more diversity
+  archive_size: 25
+  num_islands: 4
+  elite_selection_ratio: 0.3
+  exploitation_ratio: 0.7
+
+# Evaluator configuration
+evaluator:
+  timeout: 60
+  cascade_evaluation: true
+  cascade_thresholds: [0.5, 0.75]
+  parallel_evaluations: 4
+  use_llm_feedback: false
+
+# Evolution settings
+diff_based_evolution: false  # Use full rewrites instead of diffs
+allow_full_rewrites: true    # Allow full rewrites for constructor functions

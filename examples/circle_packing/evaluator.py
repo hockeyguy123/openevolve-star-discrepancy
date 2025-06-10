@@ -1,5 +1,5 @@
 """
-Evaluator for circle packing example (n=26) with improved timeout handling
+Evaluator for the circle packing problem
 """
 
 import importlib.util
