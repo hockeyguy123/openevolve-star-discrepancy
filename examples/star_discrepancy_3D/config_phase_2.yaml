@@ -10,7 +10,7 @@ llm:
   secondary_model: null
   secondary_model_weight: 0.0
   api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
-  api_key: "AIzaSyB1L_OBhKNzk0D-mWrEUqNfo5vfusg-ZXg"
+  api_key: null
   temperature: 0.7
   top_p: 0.95
   max_tokens: 8192
