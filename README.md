@@ -55,6 +55,27 @@ The best results are bolded.
 | 19 | 0.1251    | 0.0668 | 0.0654     | **0.0634**       |
 | 20 | 0.1188    | 0.0640 | 0.0611     | **0.0604**       |
 
+The values are for 3D point sets for N points, where N ranges from 1 to 16. Openevolve matches the optimal star discrepancy for N < 8 (except for N = 4).
+The best results are bolded.
+
+| N  | MPMC       | OpenEvolve         | Optimal            |
+|:---|:-----------|:-------------------|:-------------------|
+| 1  | 0.6833     | **0.6823**         | **0.6823**         |
+| 2  | **0.4239** | **0.4239**         | **0.4239**         |
+| 3  | 0.3491     | **0.3445**         | **0.3445**         |
+| 4  | 0.3071     | 0.3042             | **0.3038**         |
+| 5  | 0.2669     | **0.2618**         | **0.2618**         |
+| 6  | 0.2371     | **0.2326**         | **0.2326**         |
+| 7  | 0.2158     | **0.2090**         | **0.2090**         |
+| 8  | 0.1993     | 0.1937             | **0.1875**         |
+| 9  | N/A        | **0.1758**         | N/A                |
+| 10 | N/A        | **0.1637**         | N/A                |
+| 11 | N/A        | **0.1529**         | N/A                |
+| 12 | N/A        | **0.1440**         | N/A                |
+| 13 | N/A        | **0.1335**         | N/A                |
+| 14 | N/A        | **0.1316**         | N/A                |
+| 15 | N/A        | **0.1223**         | N/A                |
+| 16 | N/A        | **0.1207**         | N/A                |
 
 ## Discovery of Better Point Sets
 We find point sets with lower star discrepancy than the current known best in 2D for N > 30.

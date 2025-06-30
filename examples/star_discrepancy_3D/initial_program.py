@@ -1,13 +1,31 @@
-"""
-Evaluator for the star discrepancy problem
-"""
+# EVOLVE-BLOCK-START
+"""Finding optimal configuration of 16 points in a cube that mimizes the L-infinity star discrepancy."""
 import numpy as np
-import os
+
+def construct_star() -> np.ndarray:
+    """
+    Find the optimal configuration of points in a cube [0, 1) x [0, 1) x [0, 1) to minimize the L-infinity star discrepancy.
+    This function constructs 16 points that are evenly distributed and maximally distant from each other.
+    The points are represented in coordinates (x, y, z) in the cube
+    x, y, z are in the range [0, 1).
+    Returns:
+        A: np.array of shape (16, 3) with coordinates of points in the cube.
+    """
+    import scipy.stats.qmc
+    N = 16
+    A = scipy.stats.qmc.Sobol(d=3, scramble=True, seed=123).random(n=N)
+    return A
+
+# EVOLVE-BLOCK-END
+
+import numpy as np
 import itertools
 from numba import njit
-import matplotlib.pyplot as plt
-
-
+# This part remains fixed (not evolved)
+def run_star() -> np.ndarray:
+    """Run the star constructor for n=16"""
+    A = construct_star()
+    return A
 # Numba helper function for calculating discrepancy for a single box corner
 @njit(cache=True)
 def _calculate_single_box_discrepancy_numba(points_X_arg: np.ndarray, 
@@ -47,9 +65,12 @@ def _calculate_single_box_discrepancy_numba(points_X_arg: np.ndarray,
 
 def star_discrepancy(points_X: np.ndarray) -> float:
     """
-    Calculates a score based on the L-infinity star discrepancy of the point set P.
+    Calculates the L-infinity star discrepancy of the point set P.
     Optimized using Numba for the core calculation loop.
-    The score is 1 / (1 + max_discrepancy_val).
+    Args:
+        points_X (np.ndarray): An array of points to evaluate, shape (N, D) for D-dimensional points.
+    Returns:
+        float: The maximum star discrepancy value.
     """
     # Input validation and preparation
     if not isinstance(points_X, np.ndarray):
@@ -67,7 +88,7 @@ def star_discrepancy(points_X: np.ndarray) -> float:
     if N == 0:
         return 1.0
 
-    points_X_clipped = np.clip(points_X_np, 0.0, 1.0)
+    points_X_clipped = np.clip(points_X_np, 0.0, 1.0 - np.finfo(points_X_np.dtype).eps)
     
     if not points_X_clipped.flags.c_contiguous:
         points_X_clipped = np.ascontiguousarray(points_X_clipped)
@@ -100,86 +121,34 @@ def star_discrepancy(points_X: np.ndarray) -> float:
     return max_discrepancy_val
 
 
-def score_star(points_to_evaluate_list: np.ndarray) -> float:
-    discrepancy = star_discrepancy(points_to_evaluate_list)
+def score_star(X_points: np.ndarray) -> float:
+    """ Calculates the score based on the star discrepancy of the given points.
+    Args:
+        X_points (np.ndarray): An array of points to evaluate, shape (N, 3) for 3D points.
+    Returns:
+        float: The score based on the star discrepancy, defined as 1 / (1 + max_discrepancy_val).
+    """
+    discrepancy = star_discrepancy(X_points)
     return 1 / (1 + discrepancy)  # Return the score as per the definition of star discrepancy
-
-
-def visualize_2D(points: np.ndarray, output_path: str, title: str = "Star Discrepancy Points") -> None:
-    """
-    Visualizes the points in 2D and saves the plot to the specified output path.
-    """
-    fig, ax = plt.subplots(figsize=(6, 6))
-    ax.scatter(points[:, 0], points[:, 1], s=10, color='blue', marker='*')
-    ax.set_title(title)
-    ax.set_xlabel('X-axis')
-    ax.set_ylabel('Y-axis')
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.grid(True)
-    fig.tight_layout()
-    fig.savefig(output_path, bbox_inches='tight', dpi=300, pad_inches=0.05)
-    plt.close(fig)
-
-
-def visualize_3D(points: np.ndarray, output_path: str, title: str = "Star Discrepancy Points") -> None:
-    """
-    Visualizes the points in 3D and saves the plot to the specified output path.
-    """
-
-    if points.ndim == 1:
-        points = points.reshape(-1, 3)
-
-    fig, ax = plt.subplots(1, 3, figsize=(18, 6))
-    ax[0].scatter(points[:, 0], points[:, 1], s=10, color='blue', marker='*')
-    ax[0].set_xlabel('X-axis')
-    ax[0].set_ylabel('Y-axis')
-    ax[0].set_xlim(0, 1)
-    ax[0].set_ylim(0, 1)
-    ax[0].grid(True)
-    ax[1].scatter(points[:, 0], points[:, 2], s=10, color='blue', marker='*')
-    ax[1].set_title(title)
-    ax[1].set_xlabel('X-axis')
-    ax[1].set_ylabel('Z-axis')
-    ax[1].set_xlim(0, 1)
-    ax[1].set_ylim(0, 1)
-    ax[1].grid(True)
-    ax[2].scatter(points[:, 1], points[:, 2], s=10, color='blue', marker='*')
-    ax[2].set_xlabel('Y-axis')
-    ax[2].set_ylabel('Z-axis')
-    ax[2].set_xlim(0, 1)
-    ax[2].set_ylim(0, 1)
-    ax[2].grid(True)
-    fig.tight_layout()
-    fig.savefig(output_path, bbox_inches='tight', dpi=300, pad_inches=0.05)
-    plt.close(fig)
-
-
 
 
 
 if __name__ == "__main__":
-    results_path = os.path.join(os.path.dirname(__file__))
-    numbers = list(range(2, 21, 1))
-    numbers += [30, 40, 50, 60, 80, 100]
-    numbers += list(range(140, 1060, 40))
+    # Example usage
+    # points = run_star()
+    # score = score_star(points)
+    # print("Score:", score)
+    import time
+    points = np.random.rand(1020, 2)  # Example random points
+    print("Points shape:", points.shape)
+    a = time.time()
+    score = score_star(points)
+    b = time.time()
+    print("Time taken:", b - a)
 
-
-    # for i in numbers:
-    #     best_points = np.loadtxt(os.path.join(results_path, f"star_discrepancy_Linf_2D_{i:04d}/best_points.txt"), delimiter=',')
-    #     star_disc = star_discrepancy(best_points)
-    #     print(f"Star Discrepancy for 2D, {i} points: {star_disc}")
-
-    #     visualize_2D(best_points, 
-    #                os.path.join(results_path, f"star_discrepancy_Linf_2D_{i:04d}/best_points_visualization.png"),
-    #                title=f"Openevolve 2D {i} Points Star Discrepancy {star_disc:.4f}")
+    a = time.time()
+    points = run_star()
+    b = time.time()
+    print("Time taken to run star:", b - a)
+    print("Score:", score)
     
-    numbers = list(range(1, 17, 1))
-
-    for i in numbers:
-        best_points = np.loadtxt(os.path.join(results_path, f"star_discrepancy_Linf_3D_{i:03d}/best_points.txt"), delimiter=',')
-        star_disc = star_discrepancy(best_points)
-        print(f"Star Discrepancy for 3D, {i} points: {star_disc}")
-        visualize_3D(best_points, 
-                   os.path.join(results_path, f"star_discrepancy_Linf_3D_{i:03d}/best_points_visualization.png"),
-                   title=f"Openevolve 3D {i} Points Star Discrepancy {star_disc:.4f}")
