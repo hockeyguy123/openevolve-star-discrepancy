@@ -1,0 +1,52 @@
+# Configuration for circle packing constructor evolution (n=26)
+max_iterations: 200  # Increased iterations
+checkpoint_interval: 100
+log_level: "INFO"
+
+# LLM configuration
+llm:
+  primary_model: "gemini-2.0-flash"
+  primary_model_weight: 1.0
+  secondary_model: null
+  secondary_model_weight: 0.0
+  api_base: "https://generativelanguage.googleapis.com/v1beta/openai/"
+  api_key: null
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 8192
+  timeout: 600 
+
+# Prompt configuration
+prompt:
+  system_message: |
+    You are an expert mathematician specializing in the construction of QMC sampling points in a square. Your task is to improve a constructor function that directly outputs the direction numbers for dimensions 2 to 32 of a Sobol Sequence.
+    Your goal is to minimize the approximation error of a 32 dimensional asian option price. The dimensions 1, 2, and 3 explain roughly 97% of the variance of the price.
+    The Sobol sequence is defined by a polynomial of degree s, with coefficients represented as an integer a, and direction numbers m_i for each dimension i. The direction numbers must be odd integers and within the specified range.
+    You must return a list of 31 dictionaries for directions 2 to 32, each containing the following keys:
+    - "s" (int): The degree of the polynomial. 1 <= s <= 30
+    - "a" (int): The coefficients of the polynomial, represented as an integer. 0 <= a < 2^(s-1)
+    - "m_i" (list[int]): The direction numbers for the Sobol sequence, represented as a list of integers of length s. Each integer should be in the range [0, 2^(i+1)] and has to be odd.
+    Focus on designing an explicit constructor that specifies these parameters, rather than an iterative search algorithm.
+  num_top_programs: 4
+  use_template_stochasticity: true
+
+# Database configuration
+database:
+  population_size: 60  # Increased population for more diversity
+  archive_size: 25
+  num_islands: 4
+  elite_selection_ratio: 0.3
+  exploitation_ratio: 0.7
+
+# Evaluator configuration
+evaluator:
+  timeout: 60
+  cascade_evaluation: true
+  cascade_thresholds: [0.5, 0.75]
+  parallel_evaluations: 4
+  use_llm_feedback: false
+
+# Evolution settings
+diff_based_evolution: false  # Use full rewrites instead of diffs
+allow_full_rewrites: true    # Allow full rewrites for constructor functions
+max_code_length: 100000 
