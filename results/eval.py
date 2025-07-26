@@ -165,21 +165,21 @@ if __name__ == "__main__":
     numbers += list(range(140, 1060, 40))
 
 
-    # for i in numbers:
-    #     best_points = np.loadtxt(os.path.join(results_path, f"star_discrepancy_Linf_2D_{i:04d}/best_points.txt"), delimiter=',')
-    #     star_disc = star_discrepancy(best_points)
-    #     print(f"Star Discrepancy for 2D, {i} points: {star_disc}")
+    for i in numbers:
+        best_points = np.loadtxt(os.path.join(results_path, f"star_discrepancy_Linf_2D_{i:04d}/best_points.txt"), delimiter=',')
+        star_disc = star_discrepancy(best_points)
+        print(f"Star Discrepancy for 2D, {i} points: {star_disc}")
 
     #     visualize_2D(best_points, 
     #                os.path.join(results_path, f"star_discrepancy_Linf_2D_{i:04d}/best_points_visualization.png"),
     #                title=f"Openevolve 2D {i} Points Star Discrepancy {star_disc:.4f}")
     
-    numbers = list(range(1, 17, 1))
+    # numbers = list(range(1, 17, 1))
 
-    for i in numbers:
-        best_points = np.loadtxt(os.path.join(results_path, f"star_discrepancy_Linf_3D_{i:03d}/best_points.txt"), delimiter=',')
-        star_disc = star_discrepancy(best_points)
-        print(f"Star Discrepancy for 3D, {i} points: {star_disc}")
-        visualize_3D(best_points, 
-                   os.path.join(results_path, f"star_discrepancy_Linf_3D_{i:03d}/best_points_visualization.png"),
-                   title=f"Openevolve 3D {i} Points Star Discrepancy {star_disc:.4f}")
+    # for i in numbers:
+    #     best_points = np.loadtxt(os.path.join(results_path, f"star_discrepancy_Linf_3D_{i:03d}/best_points.txt"), delimiter=',')
+    #     star_disc = star_discrepancy(best_points)
+    #     print(f"Star Discrepancy for 3D, {i} points: {star_disc}")
+    #     visualize_3D(best_points, 
+    #                os.path.join(results_path, f"star_discrepancy_Linf_3D_{i:03d}/best_points_visualization.png"),
+    #                title=f"Openevolve 3D {i} Points Star Discrepancy {star_disc:.4f}")
